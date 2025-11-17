@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TravelAgent Demo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>TravelAgent – Simple AI Travel Planner</h1>
+
+<div class="container">
+
+    <h3>Your Name:</h3>
+    <input id="user" placeholder="e.g., Riyaz" />
+
+    <h3>Your Preferences (comma separated):</h3>
+    <input id="prefs" placeholder="art,nature,history" />
+
+    <button onclick="recommend()">Get Recommendations</button>
+
+    <pre id="rec-output"></pre>
+
+    <hr>
+
+    <h3>Destination:</h3>
+    <input id="dest" placeholder="Chennai" />
+
+    <h3>Start Date:</h3>
+    <input id="start" placeholder="2024-04-01" />
+
+    <h3>End Date:</h3>
+    <input id="end" placeholder="2024-04-04" />
+
+    <button onclick="plan()">Generate Itinerary</button>
+
+    <pre id="plan-output"></pre>
+
+</div>
+
+<script>
+async function recommend() {
+    const user = document.getElementById("user").value;
+    const prefs = document.getElementById("prefs").value.split(",");
+
+    const res = await fetch("/api/recommend", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ user, preferences: prefs })
+    });
+
+    document.getElementById("rec-output").textContent = JSON.stringify(await res.json(), null, 2);
+}
+
+async function plan() {
+    const user = document.getElementById("user").value;
+    const dest = document.getElementById("dest").value;
+    const start = document.getElementById("start").value;
+    const end = document.getElementById("end").value;
+
+    const res = await fetch("/api/plan", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ user, destination: dest, start: start, end: end })
+    });
+
+    document.getElementById("plan-output").textContent = JSON.stringify(await res.json(), null, 2);
+}
+</script>
+
+</body>
+</html>
