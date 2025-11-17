@@ -1,0 +1,7 @@
+[
+  {"name": "City Museum", "tags": ["history", "culture"]},
+  {"name": "Central Park", "tags": ["nature", "relax"]},
+  {"name": "Science Center", "tags": ["kids", "science"]},
+  {"name": "Art Gallery", "tags": ["art", "culture"]},
+  {"name": "Beach Walk", "tags": ["nature", "sunset"]}
+]
